@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Recover — Recupera tu tiempo. Multiplica tus clientes.</title>
+    <title>Time Systems — Recupera tu tiempo. Multiplica tus ventas.</title>
     <meta name="description"
         content="Sistemas de IA que eliminan tu ruido operativo y captan clientes en piloto automático. Auditoría de fricción para CEOs y empresarios.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,6 @@
             font-family: 'Space Mono', monospace;
             background: var(--bg);
             color: var(--fg);
-            cursor: none;
         }
 
         ::selection {
@@ -174,6 +173,57 @@
 
         .animate-rise {
             animation: rise 1.5s ease-in-out infinite;
+        }
+
+        /* Pilar 2 Animations */
+        @keyframes radar-pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes typing {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes calendar-beat {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .animate-radar {
+            animation: radar-pulse 2s ease-in-out infinite;
+        }
+
+        .animate-typing {
+            animation: typing 1.5s ease-in-out infinite;
+        }
+
+        .animate-calendar {
+            animation: calendar-beat 1.8s ease-in-out infinite;
         }
 
         .nav-link {
@@ -719,6 +769,15 @@
             margin-top: 1rem;
         }
 
+        .price-setup {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
         .price-note {
             max-width: 550px;
             margin: 0 auto 4rem;
@@ -978,7 +1037,7 @@
                 <path class="sand" d="M12 24h8v-2c0-2-1.5-3.5-4-5.5-2.5 2-4 3.5-4 5.5v2z" fill="currentColor"
                     opacity="0.6" />
             </svg>
-            TIME RECOVER
+            TIME SYSTEMS
         </a>
         <a href="#contacto" class="nav-link">Solicitar Auditoría →</a>
     </nav>
@@ -988,16 +1047,17 @@
     <!-- ============================================ -->
     <section class="hero">
         <div class="hero-left">
-            <div class="eyebrow">Solo 2 proyectos/mes</div>
             <h1 class="hero-title">
-                Recupera tu<br>
-                <em>tiempo</em>.<br>
-                Multiplica tus<br>
-                <span class="green">clientes</span>.
+                Automatización<br>
+                <em>Inteligente</em>.<br>
+                <span class="hero-benefits">
+                    Recupera <span class="green">tiempo</span>.
+                    Multiplica <span class="green">ventas</span>.
+                </span>
             </h1>
             <p class="hero-subtitle">
-                Sistemas de IA que eliminan tu ruido operativo y captan leads cualificados mientras duermes. Tú diriges,
-                la máquina ejecuta.
+                Sistemas de IA que eliminan tu ruido operativo y captan leads cualificados 24/7.
+                Tú diriges la estrategia, la máquina ejecuta la operación.
             </p>
             <a href="#contacto" class="cta-brutal">
                 Quiero mi auditoría
@@ -1013,7 +1073,7 @@
                 </div>
                 <div class="metric-divider"></div>
                 <div class="metric-block">
-                    <div class="metric-number" id="leads-generated">150</div>
+                    <div class="metric-number" id="leads-generated">40</div>
                     <div class="metric-label">leads cualificados/mes</div>
                 </div>
             </div>
@@ -1023,12 +1083,12 @@
     <!-- MARQUEE -->
     <div class="marquee-container">
         <div class="marquee-content">
-            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ CAPTACIÓN DE LEADS 24/7 &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA
-            PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★ AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ PIPELINE EN PILOTO AUTOMÁTICO
-            &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA RECUPERADAS &nbsp;&nbsp;&nbsp;
-            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ CAPTACIÓN DE LEADS 24/7 &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA
-            PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★ AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ PIPELINE EN PILOTO AUTOMÁTICO
-            &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA RECUPERADAS &nbsp;&nbsp;&nbsp;
+            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ CUALIFICACIÓN DE LEADS 24/7 &nbsp;&nbsp;&nbsp; ★ AGENTES
+            DE IA PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★ AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ CIERRE DE CITAS EN
+            PILOTO AUTOMÁTICO &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA RECUPERADAS &nbsp;&nbsp;&nbsp;
+            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ CUALIFICACIÓN DE LEADS 24/7 &nbsp;&nbsp;&nbsp; ★ AGENTES
+            DE IA PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★ AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ CIERRE DE CITAS EN
+            PILOTO AUTOMÁTICO &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA RECUPERADAS &nbsp;&nbsp;&nbsp;
         </div>
     </div>
 
@@ -1059,27 +1119,28 @@
             </div>
             <div class="problem-divider"></div>
             <div class="problem-side">
-                <div class="problem-side-label leads">◎ Clientes que no llegan</div>
+                <div class="problem-side-label leads">◎ Oportunidades que se escapan</div>
                 <div class="problem-item">
-                    <h4>Pipeline vacío o manual</h4>
-                    <p>Tu estrategia de captación depende de ti, de tu tiempo, de tu energía. Si paras, el pipeline se
-                        seca.</p>
+                    <h4>El interés que se enfría</h4>
+                    <p>Un lead que no recibe respuesta en los primeros 5 minutos tiene 10 veces menos probabilidades de
+                        convertir. Tú tardas horas (o días).</p>
                 </div>
                 <div class="problem-item">
-                    <h4>Leads fríos, sin contexto</h4>
-                    <p>Recibes contactos genéricos que requieren horas de cualificación antes de saber si valen la pena.
-                    </p>
+                    <h4>Cualificación manual lenta</h4>
+                    <p>Pierdes tiempo en reuniones con personas que no tienen presupuesto o no encajan con tu perfil de
+                        cliente ideal.</p>
                 </div>
                 <div class="problem-item">
-                    <h4>El seguimiento que no existe</h4>
-                    <p>El 80% de las ventas necesitan 5+ interacciones. Tú abandonas en la segunda por falta de tiempo.
-                    </p>
+                    <h4>Citas sin confirmar</h4>
+                    <p>El proceso de "agenda una llamada" es un laberinto de emails de ida y vuelta donde el 50% de los
+                        interesados abandona.</p>
                 </div>
             </div>
         </div>
         <div class="problem-connector">
             <p>El mismo problema con dos caras: <em style="color: var(--accent);">no tienes tiempo</em> para captar, y
-                <em style="color: var(--accent);">no captas</em> porque no tienes tiempo.</p>
+                <em style="color: var(--accent);">no captas</em> porque no tienes tiempo.
+            </p>
         </div>
     </section>
 
@@ -1121,7 +1182,8 @@
                         </div>
                         <div class="solution-text">
                             <h4>Integración silenciosa</h4>
-                            <p>Slack, Email, WhatsApp, CRMs. Tus agentes viven donde ya trabajas, sin interferir.</p>
+                            <p>Slack, Email, WhatsApp, CRMs, etc. Tus agentes viven donde ya trabajas, sin interferir.
+                            </p>
                         </div>
                     </li>
                     <li class="solution-item">
@@ -1140,51 +1202,66 @@
             </div>
             <!-- Pilar 2: Leads -->
             <div>
-                <div class="solution-col-label leads">Pilar 2 — Captación Automática</div>
+                <div class="solution-col-label leads">Pilar 2 — Cualificación Inteligente</div>
                 <ul class="solution-list">
                     <li class="solution-item">
                         <div class="solution-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
-                                <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1"
-                                    stroke-dasharray="3 3" />
-                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="0.5" opacity="0.4" />
+                                <path class="animate-radar" d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <path d="M12 12L16 16" stroke="currentColor" stroke-width="1.5" opacity="0.6" />
                             </svg>
                         </div>
                         <div class="solution-text">
-                            <h4>Prospección inteligente</h4>
-                            <p>Agentes que identifican tu cliente ideal en LinkedIn, directorios y bases de datos. Sin
-                                esfuerzo manual.</p>
+                            <h4>Detección de intención</h4>
+                            <p>Agentes que analizan cada consulta entrante (web, email, redes) para identificar interés
+                                real en milisegundos. Sin errores.</p>
                         </div>
                     </li>
                     <li class="solution-item">
                         <div class="solution-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M4 4h16v12H5.17L4 17.17V4z" stroke="currentColor" stroke-width="1.5" />
-                                <path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="1.2" opacity="0.6" />
+                                <path class="animate-typing" d="M9 10l2 2 4-4" stroke="currentColor" stroke-width="1.2"
+                                    opacity="0.6" />
                             </svg>
                         </div>
                         <div class="solution-text">
-                            <h4>Mensajes hiperpersonalizados</h4>
-                            <p>IA que investiga cada prospecto y escribe mensajes con contexto real. No spam:
-                                conversaciones que abren puertas.</p>
+                            <h4>Optimización Continua de Conversión</h4>
+                            <p>Cada interacción se analiza para mejorar las respuestas. El sistema aprende qué mensajes
+                                convierten mejor y ajusta su estrategia en tiempo real.</p>
                         </div>
                     </li>
                     <li class="solution-item">
                         <div class="solution-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 12L9 18L21 6" stroke="currentColor" stroke-width="2" />
-                                <path d="M3 6L9 12" stroke="currentColor" stroke-width="1" opacity="0.3" />
+                                <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" stroke-width="1.5" />
+                                <circle class="animate-calendar" cx="16" cy="15" r="2" fill="var(--accent2)" />
                             </svg>
                         </div>
                         <div class="solution-text">
-                            <h4>Follow-up automático</h4>
-                            <p>Secuencias de seguimiento que nunca olvidan, nunca presionan y convierten el interés
-                                tibio en reuniones cerradas.</p>
+                            <h4>Cierre de citas automático</h4>
+                            <p>Sincronización directa con tu calendario para que el cliente pase del interés a la
+                                reunión confirmada en segundos.</p>
                         </div>
                     </li>
                 </ul>
             </div>
+        </div>
+
+        <!-- Security Note -->
+        <div
+            style="max-width: 800px; margin: 4rem auto 0; padding: 2rem; border: 1px solid rgba(0,0,0,0.08); background: rgba(0,0,0,0.02);">
+            <p
+                style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 0.75rem;">
+                Nota Técnica</p>
+            <p style="font-size: 0.85rem; line-height: 1.7; opacity: 0.7;">
+                Protocolos cifrados end-to-end y cumplimiento estricto de GDPR. Tus datos nunca entrenan modelos
+                públicos.
+            </p>
         </div>
     </section>
 
@@ -1205,7 +1282,7 @@
     <section class="process-section" id="proceso">
         <div class="section-label">El Proceso</div>
         <h2 class="section-title">
-            De la auditoría al piloto automático en 4 semanas.
+            De la auditoría al piloto automático en 4 pasos.
         </h2>
         <div class="process-timeline">
             <div class="process-step" data-step="01">
@@ -1236,8 +1313,7 @@
             </div>
             <div class="process-step" data-step="04">
                 <h4>Optimización continua</h4>
-                <p>Cada semana analizamos resultados, refinamos mensajes y escalamos los canales que mejor convierten.
-                </p>
+                <p>Analizamos resultados, refinamos mensajes y escalamos los canales que mejor convierten.</p>
                 <div class="process-tags">
                     <span class="tag leads">Leads</span>
                 </div>
@@ -1265,12 +1341,12 @@
                 <span class="case-arrow">→</span>
             </div>
             <div class="case-card">
-                <div class="case-category leads">Captación automática</div>
-                <div class="case-metric">47</div>
-                <div class="case-metric-label">Reuniones / Mes</div>
+                <div class="case-category leads">Cualificación inteligente</div>
+                <div class="case-metric">22</div>
+                <div class="case-metric-label">Citas cerradas / Mes</div>
                 <p class="case-description">
-                    Sistema de prospección en LinkedIn + email que genera 47 reuniones cualificadas al mes. Sin
-                    contratar comerciales, sin cold calling.
+                    Sistema que atiende interesados 24/7 y agenda solo a los que cumplen criterios de inversión. 22
+                    reuniones automáticas al mes.
                 </p>
                 <span class="case-arrow">→</span>
             </div>
@@ -1305,12 +1381,12 @@
                 <span class="case-arrow">→</span>
             </div>
             <div class="case-card">
-                <div class="case-category leads">Captación automática</div>
-                <div class="case-metric">6x</div>
-                <div class="case-metric-label">Más leads cualificados</div>
+                <div class="case-category leads">Atención constante</div>
+                <div class="case-metric">100%</div>
+                <div class="case-metric-label">Leads atendidos</div>
                 <p class="case-description">
-                    De 8 leads/mes manuales a 50+ leads cualificados con follow-up automático multicanal. Sin aumentar
-                    presupuesto publicitario.
+                    De perder la mitad de llamadas e emails por falta de tiempo a una respuesta inmediata y
+                    cualificación por IA en cada contacto.
                 </p>
                 <span class="case-arrow">→</span>
             </div>
@@ -1323,22 +1399,23 @@
     <section class="pricing-section">
         <div class="section-label" style="color: rgba(255,255,255,0.3);">La Inversión</div>
         <h2 class="section-title" style="color: var(--bg); margin: 0 auto;">
-            No es un coste. Es comprar tiempo y clientes.
+            No es un coste. Es liberar tiempo y captar clientes.
         </h2>
         <div class="price-display">
-            <p class="price-from">Sistemas desde</p>
-            <p class="price-amount">2.000€</p>
-            <p class="price-period">al mes, todo incluido</p>
+            <p class="price-setup">Setup: 3.000€ <span style="opacity: 0.6; font-weight: 400;">(Pago único)</span></p>
+            <p class="price-from">Suscripción gestionada</p>
+            <p class="price-amount">1.200€</p>
+            <p class="price-period">al mes <small style="font-size: 0.6em; opacity: 0.7;">(sin IVA)</small></p>
         </div>
         <div class="price-includes">
             <span class="price-item">Automatización operativa</span>
-            <span class="price-item">Captación de leads</span>
-            <span class="price-item">Follow-up automático</span>
-            <span class="price-item">Optimización semanal</span>
+            <span class="price-item">Cualificación de leads</span>
+            <span class="price-item">Cierre de citas automático</span>
+            <span class="price-item">Optimización continua</span>
         </div>
         <p class="price-note">
-            Para empresarios cuya hora vale más de 200€ y cuyo pipeline no puede depender de la suerte. Si no
-            recuperamos al menos 10x tu inversión, no tiene sentido trabajar juntos.
+            Para empresarios cuyo tiempo vale más de 200€ la hora y negocios que necesitan un pipeline predecible.
+            Te ayudamos a optimizar tus procesos y citas para maximizar oportunidades.
         </p>
         <a href="#contacto" class="cta-brutal" style="margin: 0 auto;">
             Solicitar auditoría dual
@@ -1394,7 +1471,7 @@
                 <path d="M10 6v4c0 3 2 5.5 6 8-4 2.5-6 5-6 8v4h12v-4c0-3-2-5.5-6-8 4-2.5 6-5 6-8V6H10z"
                     stroke="currentColor" stroke-width="1.5" fill="none" />
             </svg>
-            TIME RECOVER
+            TIME SYSTEMS
         </div>
         <div class="footer-links">
             <a href="privacidad.html">Privacidad</a>
@@ -1447,7 +1524,7 @@
                     hasAnimatedHero = true;
                     animateNumber(hoursEl, 0, 30, 2000);
                     setTimeout(() => {
-                        animateNumber(leadsEl, 0, 150, 2500, '+');
+                        animateNumber(leadsEl, 0, 40, 2500, '+');
                     }, 400);
                 }
             });
