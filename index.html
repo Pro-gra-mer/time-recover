@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Recover — Recupera tu tiempo con IA</title>
+    <meta name="description"
+        content="Sistemas de inteligencia artificial que eliminan las tareas que te roban horas. Auditoría de fricción para CEOs y empresarios.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #F5F0E8;
+            --fg: #1A1A1A;
+            --accent: #C41E3A;
+            --muted: #8B7355;
+            --cream: #FAF7F2;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg);
+            color: var(--fg);
+            cursor: none;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        section {
+            padding: 8rem 4rem;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--muted);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            max-width: 700px;
+            line-height: 1.2;
+            margin-bottom: 4rem;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        .logo-icon .sand {
+            animation: sand-fall 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes sand-fall {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Icon Animations */
+        @keyframes scan {
+
+            0%,
+            100% {
+                transform: translateY(-2px);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translateY(4px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes flow {
+            0% {
+                stroke-dashoffset: 20;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes rise {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+        .animate-scan {
+            animation: scan 2s ease-in-out infinite;
+        }
+
+        .animate-flow {
+            stroke-dasharray: 4;
+            animation: flow 3s linear infinite;
+        }
+
+        .animate-rise {
+            animation: rise 1.5s ease-in-out infinite;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: white;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .hero-left {
+            background: var(--fg);
+            color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 6rem;
+            position: relative;
+        }
+
+        .hero-right {
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eyebrow {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            opacity: 0.6;
+            max-width: 400px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-brutal {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cta-brutal:hover {
+            transform: translate(-4px, -4px);
+        }
+
+        .cta-brutal::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent);
+            z-index: -1;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cta-brutal:hover::after {
+            top: 8px;
+            left: 8px;
+        }
+
+        /* Clock Visualization */
+        .time-display {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 20rem;
+            font-weight: 900;
+            opacity: 0.05;
+            color: var(--fg);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .clock-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .clock-ring {
+            position: absolute;
+            inset: 0;
+            border: 2px solid var(--fg);
+            border-radius: 50%;
+            animation: rotate-slow 60s linear infinite;
+        }
+
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .clock-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .clock-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-top: 0.5rem;
+            opacity: 0.5;
+        }
+
+        @keyframes rotate-slow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Marquee */
+        .marquee-container {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ===== PROBLEM ===== */
+        .problem-section {
+            background: var(--bg);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .problem-card {
+            padding: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .problem-card:hover {
+            background: var(--cream);
+        }
+
+        .problem-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            opacity: 0.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card p {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            opacity: 0.6;
+        }
+
+        /* ===== SOLUTION ===== */
+        .solution-section {
+            background: var(--cream);
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+        }
+
+        .solution-list {
+            list-style: none;
+        }
+
+        .solution-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .solution-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .solution-text h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-text p {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            opacity: 0.6;
+        }
+
+        .quote-box {
+            background: var(--fg);
+            color: var(--bg);
+            padding: 4rem;
+            position: sticky;
+            top: 8rem;
+            align-self: start;
+        }
+
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            line-height: 0.5;
+            opacity: 0.2;
+            margin-bottom: 2rem;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            line-height: 1.5;
+            font-weight: 700;
+        }
+
+        /* ===== PROCESS ===== */
+        .process-section {
+            background: var(--bg);
+        }
+
+        .process-timeline {
+            display: flex;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .process-step {
+            flex: 1;
+            padding: 3rem;
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .process-step:last-child {
+            border-right: none;
+        }
+
+        .process-step::before {
+            content: attr(data-step);
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.08;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-step h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .process-step p {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            opacity: 0.6;
+        }
+
+        /* ===== USE CASES ===== */
+        .cases-section {
+            background: var(--cream);
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .case-card {
+            background: var(--bg);
+            padding: 3rem;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+        }
+
+        .case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-category {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .case-metric {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-metric-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .case-description {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            opacity: 0.7;
+        }
+
+        .case-arrow {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+        }
+
+        .case-card:hover .case-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== PRICING ===== */
+        .pricing-section {
+            background: var(--fg);
+            color: var(--bg);
+            text-align: center;
+        }
+
+        .price-display {
+            margin: 4rem 0;
+        }
+
+        .price-from {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+
+        .price-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(5rem, 12vw, 10rem);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .price-period {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            margin-top: 1rem;
+        }
+
+        .price-note {
+            max-width: 500px;
+            margin: 0 auto 4rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            opacity: 0.6;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-section {
+            background: var(--cream);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+        }
+
+        .contact-intro h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .contact-intro p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            opacity: 0.6;
+            max-width: 400px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background: var(--bg);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--bg);
+        }
+
+        .form-group input:-webkit-autofill,
+        .form-group input:-webkit-autofill:hover,
+        .form-group input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 1000px var(--bg) inset;
+            -webkit-text-fill-color: var(--fg);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--fg);
+            color: var(--bg);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .submit-btn:hover {
+            transform: translate(-4px, -4px);
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--fg);
+            z-index: -1;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--fg);
+            color: var(--bg);
+            padding: 3rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--bg);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 8rem 2rem 4rem;
+            }
+
+            .hero-right {
+                min-height: 50vh;
+            }
+
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .quote-box {
+                position: static;
+            }
+
+            .process-timeline {
+                flex-direction: column;
+            }
+
+            .process-step {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        /* ===== CURSOR ===== */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor-dot" id="cursor"></div>
+
+    <nav>
+        <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 4h16v2H8V4z" fill="currentColor" />
+                <path d="M8 26h16v2H8v-2z" fill="currentColor" />
+                <path d="M10 6v4c0 3 2 5.5 6 8-4 2.5-6 5-6 8v4h12v-4c0-3-2-5.5-6-8 4-2.5 6-5 6-8V6H10z"
+                    stroke="currentColor" stroke-width="1.5" fill="none" />
+                <path class="sand" d="M12 8h8v2c0 2-1.5 3.5-4 5.5-2.5-2-4-3.5-4-5.5V8z" fill="currentColor"
+                    opacity="0.3" />
+                <path class="sand" d="M12 24h8v-2c0-2-1.5-3.5-4-5.5-2.5 2-4 3.5-4 5.5v2z" fill="currentColor"
+                    opacity="0.6" />
+            </svg>
+            TIME RECOVER
+        </a>
+        <a href="#contacto" class="nav-link">Solicitar Auditoría →</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-left">
+            <div class="eyebrow">Solo 2 proyectos/mes</div>
+            <h1 class="hero-title">
+                Tu tiempo<br>
+                tiene <em>precio</em>.<br>
+                Recupéralo.
+            </h1>
+            <p class="hero-subtitle">
+                No necesitas más personal. Necesitas sistemas de IA que ejecuten el ruido mientras tú diriges.
+            </p>
+            <a href="#contacto" class="cta-brutal">
+                Recuperar mis horas
+                <span>→</span>
+            </a>
+        </div>
+        <div class="hero-right">
+            <span class="time-display">∞</span>
+            <div class="clock-container">
+                <div class="clock-ring"></div>
+                <div class="clock-ring" style="inset: 20px; animation-duration: 45s; animation-direction: reverse;">
+                </div>
+                <div class="clock-ring" style="inset: 40px; animation-duration: 30s;"></div>
+                <div class="clock-center">
+                    <div class="clock-number" id="hours-saved">30</div>
+                    <div class="clock-label">horas/semana recuperadas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★
+            AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ INTEGRACIÓN SILENCIOSA &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA
+            RECUPERADAS &nbsp;&nbsp;&nbsp; ★ SOLO 2 PROYECTOS/MES &nbsp;&nbsp;&nbsp;
+            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★
+            AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ INTEGRACIÓN SILENCIOSA &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA
+            RECUPERADAS &nbsp;&nbsp;&nbsp; ★ SOLO 2 PROYECTOS/MES &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- PROBLEM -->
+    <section class="problem-section" id="problema">
+        <div class="section-label">El Problema</div>
+        <h2 class="section-title">
+            Tu negocio crece. Tu calendario no.
+        </h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-number">01</div>
+                <h3>El ruido operativo</h3>
+                <p>Emails, reportes, follow-ups, coordinación. Tareas que no generan valor pero devoran tu agenda.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-number">02</div>
+                <h3>La ilusión del control</h3>
+                <p>Revisas todo porque "nadie lo hace como tú". Pero ese control te cuesta 30+ horas semanales.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-number">03</div>
+                <h3>El coste invisible</h3>
+                <p>Cada hora en tareas operativas es una hora menos en estrategia, clientes clave o tu propia vida.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="solution-section" id="solucion">
+        <div class="section-label">La Arquitectura</div>
+        <h2 class="section-title">
+            Agentes invisibles que ejecutan mientras tú decides.
+        </h2>
+        <div class="solution-content">
+            <ul class="solution-list">
+                <li class="solution-item">
+                    <div class="solution-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 4H21V6L14 13V21H10V13L3 6V4Z" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="square" />
+                            <path class="animate-scan" d="M8 8H16" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                    </div>
+                    <div class="solution-text">
+                        <h4>Filtrado inteligente</h4>
+                        <p>Solo lo que requiere tu atención llega a ti. El resto se procesa, archiva o responde
+                            automáticamente.</p>
+                    </div>
+                </li>
+                <li class="solution-item">
+                    <div class="solution-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
+                            <rect x="14" y="14" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
+                            <path class="animate-flow" d="M10 7H17V14" stroke="currentColor" stroke-width="1.5" />
+                            <path class="animate-flow" d="M14 17H7V10" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                    </div>
+                    <div class="solution-text">
+                        <h4>Integración silenciosa</h4>
+                        <p>Slack, Email, WhatsApp, CRMs. Tus agentes viven donde ya trabajas, sin interferir.</p>
+                    </div>
+                </li>
+                <li class="solution-item">
+                    <div class="solution-icon">
+                        <svg class="animate-rise" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" />
+                            <path d="M17 17V7H7" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="solution-text">
+                        <h4>Evolución continua</h4>
+                        <p>Cada semana más precisos, más rápidos, más alineados con tu forma de pensar.</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="quote-box">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">Tú no aprendes IA. La IA trabaja para ti.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process-section" id="proceso">
+        <div class="section-label">El Proceso</div>
+        <h2 class="section-title">
+            De la auditoría al piloto automático en 4 semanas.
+        </h2>
+        <div class="process-timeline">
+            <div class="process-step" data-step="01">
+                <h4>Auditoría de fricción</h4>
+                <p>Identificamos cada tarea que te roba foco. Mapeamos tu flujo de trabajo real.</p>
+            </div>
+            <div class="process-step" data-step="02">
+                <h4>Arquitectura de agentes</h4>
+                <p>Diseñamos el ecosistema de IA específico para tu operativa.</p>
+            </div>
+            <div class="process-step" data-step="03">
+                <h4>Despliegue y calibración</h4>
+                <p>Implementamos, entrenamos con tu tono y ajustamos hasta la perfección.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section class="cases-section" id="casos">
+        <div class="section-label">Casos de Uso Quirúrgicos</div>
+        <h2 class="section-title">
+            Resultados reales. Sin adornos.
+        </h2>
+        <div class="cases-grid">
+            <div class="case-card">
+                <div class="case-category">Gestión de Email</div>
+                <div class="case-metric">0</div>
+                <div class="case-metric-label">Intervención humana</div>
+                <p class="case-description">
+                    De 400+ emails de soporte diarios a respuestas automáticas con un 98% de satisfacción. El CEO dejó
+                    de ver su bandeja de entrada.
+                </p>
+                <span class="case-arrow">→</span>
+            </div>
+            <div class="case-card">
+                <div class="case-category">Agenda Ejecutiva</div>
+                <div class="case-metric">32h</div>
+                <div class="case-metric-label">Recuperadas / Semana</div>
+                <p class="case-description">
+                    Coordinación automática de reuniones, recordatorios inteligentes y filtrado de solicitudes
+                    irrelevantes. Cero conflictos de agenda.
+                </p>
+                <span class="case-arrow">→</span>
+            </div>
+            <div class="case-card">
+                <div class="case-category">Operaciones</div>
+                <div class="case-metric">85%</div>
+                <div class="case-metric-label">Tareas Automatizadas</div>
+                <p class="case-description">
+                    Informes financieros, seguimiento de proveedores y gestión documental ejecutados sin supervisión. El
+                    equipo se enfoca en lo estratégico.
+                </p>
+                <span class="case-arrow">→</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing-section">
+        <div class="section-label" style="color: rgba(255,255,255,0.3);">La Inversión</div>
+        <h2 class="section-title" style="color: var(--bg); margin: 0 auto;">
+            No es un coste. Es comprar libertad.
+        </h2>
+        <div class="price-display">
+            <p class="price-from">Sistemas desde</p>
+            <p class="price-amount">2.000€</p>
+            <p class="price-period">al mes, todo incluido</p>
+        </div>
+        <p class="price-note">
+            Para empresarios cuya hora vale más de 200€. Si no recuperamos al menos 10x tu inversión en tiempo, no tiene
+            sentido trabajar juntos.
+        </p>
+        <a href="#contacto" class="cta-brutal" style="margin: 0 auto;">
+            Solicitar auditoría
+            <span>→</span>
+        </a>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contacto">
+        <div class="section-label">Contacto</div>
+        <h2 class="section-title">
+            ¿Listo para recuperar tu tiempo?
+        </h2>
+        <div class="contact-grid">
+            <div class="contact-intro">
+                <h3>Cuéntanos qué te roba horas y diseñamos tu sistema.</h3>
+                <p>Esto no es una demo ni una consultoría gratuita. Es una conversación para evaluar si tiene sentido
+                    trabajar juntos.</p>
+            </div>
+            <form class="contact-form" action="contacto.php" method="POST">
+                <div id="status-message"
+                    style="display: none; padding: 1.5rem; margin-bottom: 2rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" required placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                    <label>Email corporativo</label>
+                    <input type="email" name="email" required placeholder="tu@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label>¿Qué te roba más tiempo hoy?</label>
+                    <textarea name="tareas" required placeholder="Email, gestión de equipo, facturación..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    Enviar solicitud →
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">
+            <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" viewBox="0 0 32 32"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 4h16v2H8V4z" fill="currentColor" />
+                <path d="M8 26h16v2H8v-2z" fill="currentColor" />
+                <path d="M10 6v4c0 3 2 5.5 6 8-4 2.5-6 5-6 8v4h12v-4c0-3-2-5.5-6-8 4-2.5 6-5 6-8V6H10z"
+                    stroke="currentColor" stroke-width="1.5" fill="none" />
+            </svg>
+            TIME RECOVER
+        </div>
+        <div class="footer-links">
+            <a href="privacidad.html">Privacidad</a>
+            <a href="terminos.html">Términos</a>
+            <a href="#">© 2026</a>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor
+        const cursor = document.getElementById('cursor');
+        let cursorX = 0, cursorY = 0;
+        let targetX = 0, targetY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (targetX - cursorX) * 0.15;
+            cursorY += (targetY - cursorY) * 0.15;
+            cursor.style.left = cursorX - 4 + 'px';
+            cursor.style.top = cursorY - 4 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Animate hours counter on scroll
+        const hoursEl = document.getElementById('hours-saved');
+        let hasAnimated = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    animateNumber(hoursEl, 0, 30, 2000);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(hoursEl);
+
+        function animateNumber(el, start, end, duration) {
+            let startTime = null;
+            function update(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 4);
+                el.textContent = Math.floor(start + (end - start) * eased);
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        // Handle Form Status Notifications
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const statusEl = document.getElementById('status-message');
+
+        if (status === 'success') {
+            statusEl.style.display = 'block';
+            statusEl.style.backgroundColor = 'rgba(0, 255, 100, 0.1)';
+            statusEl.style.border = '1px solid rgba(0, 255, 100, 0.3)';
+            statusEl.style.color = '#00ff64';
+            statusEl.textContent = '◆ Solicitud enviada correctamente. Evaluaremos tu caso en las próximas 24h.';
+        } else if (status === 'error' || status === 'error_server') {
+            statusEl.style.display = 'block';
+            statusEl.style.backgroundColor = 'rgba(196, 30, 58, 0.1)';
+            statusEl.style.border = '1px solid rgba(196, 30, 58, 0.3)';
+            statusEl.style.color = '#C41E3A';
+            statusEl.textContent = '✕ Error al enviar. Por favor, revisa los datos o inténtalo más tarde.';
+        }
+    </script>
+</body>
+
+</html>

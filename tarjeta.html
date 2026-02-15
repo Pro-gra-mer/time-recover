@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Visita - Time Recover</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5F0E8;
+            --fg: #1A1A1A;
+            --accent: #C41E3A;
+            --cream: #FAF7F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Space Mono', monospace;
+            padding: 20px;
+        }
+
+        /* Area de Impresión: 85mm x 55mm (estándar europeo) */
+        .card {
+            width: 85mm;
+            height: 55mm;
+            background: var(--bg);
+            color: var(--fg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 20px;
+            display: flex;
+            border-radius: 2px;
+            /* Forzar fondos en impresión */
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .card-front {
+            background: var(--fg);
+            color: var(--bg);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .card-back {
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 6mm;
+            display: flex;
+        }
+
+        /* Front specific */
+        .logo-group {
+            text-align: center;
+        }
+
+        .logo-svg {
+            width: 12mm;
+            height: 12mm;
+            margin-bottom: 3mm;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 5mm;
+            font-weight: 900;
+            letter-spacing: 0.5mm;
+        }
+
+        .tagline {
+            font-size: 2mm;
+            text-transform: uppercase;
+            letter-spacing: 1mm;
+            margin-top: 2mm;
+            opacity: 0.8;
+        }
+
+        .tagline span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Back specific */
+        .hero-text-mini {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5mm;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-top: 1mm;
+            /* Más arriba */
+            margin-left: 6mm;
+            /* Más margen a la izquierda */
+            margin-bottom: auto;
+            /* Empuja el siguiente bloque hacia abajo */
+        }
+
+        .hero-text-mini em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .top-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .brand-side {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 4mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+
+        .contact-details {
+            margin-top: 4mm;
+        }
+
+        .detail {
+            font-size: 2.2mm;
+            line-height: 1.6;
+            margin-bottom: 1mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+
+        .detail svg {
+            color: var(--accent);
+            width: 2.5mm;
+            height: 2.5mm;
+        }
+
+        .qr-area {
+            position: absolute;
+            bottom: 6mm;
+            right: 6mm;
+            width: 15mm;
+            height: 15mm;
+            background: white;
+            padding: 1.5mm;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-text {
+            border-left: 2px solid var(--accent);
+            padding-left: 3mm;
+            margin-top: auto;
+            max-width: 50mm;
+            /* Evita que el texto choque con el QR */
+        }
+
+        .cta-text h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3mm;
+            margin-bottom: 1mm;
+        }
+
+        .cta-text p {
+            font-size: 1.8mm;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.1mm;
+        }
+
+        /* UI elements */
+        .print-btn {
+            background: var(--fg);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+        }
+
+        .instruction {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .print-btn,
+            .instruction {
+                display: none;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #eee;
+                margin: 10mm 0;
+                /* Espacio entre tarjetas en papel */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <p class="instruction">Vista previa de impresión (85mm x 55mm)</p>
+    <button class="print-btn" onclick="window.print()">Imprimir Tarjetas</button>
+
+    <!-- ANVERSO (FRONT) -->
+    <div class="card card-front">
+        <div class="logo-group">
+            <svg class="logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 4h16v2H8V4z" fill="currentColor" />
+                <path d="M8 26h16v2H8v-2z" fill="currentColor" />
+                <path d="M10 6v4c0 3 2 5.5 6 8-4 2.5-6 5-6 8v4h12v-4c0-3-2-5.5-6-8 4-2.5 6-5 6-8V6H10z"
+                    stroke="currentColor" stroke-width="1.5" fill="none" />
+            </svg>
+            <div class="logo-text">TIME RECOVER</div>
+            <div class="tagline"><span>SISTEMAS DE IA</span> DE ALTO RENDIMIENTO</div>
+        </div>
+    </div>
+
+    <!-- REVERSO (BACK) -->
+    <div class="card card-back">
+        <div class="top-info">
+            <div class="brand-side">
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6v4c0 3 2 5.5 6 8-4 2.5-6 5-6 8v4h12v-4c0-3-2-5.5-6-8 4-2.5 6-5 6-8V6H10z"
+                        stroke="var(--accent)" stroke-width="2" fill="none" />
+                </svg>
+                TR
+            </div>
+            <div class="contact-details">
+                <div class="detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    hola@timerecover.com
+                </div>
+                <div class="detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                    www.timerecover.com
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-text-mini">
+            Tu tiempo<br>
+            tiene <em>precio</em>.<br>
+            Recupéralo.
+        </div>
+
+        <div class="cta-text">
+            <h4>Recupera 30h/semana.</h4>
+            <p>Auditoría de fricción y automatización personalizada.</p>
+        </div>
+
+        <div class="qr-area">
+            <!-- QR dinámico que apunta a tu dominio -->
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://timerecover.com&color=1a1a1a&bgcolor=ffffff"
+                alt="QR Contacto" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+    </div>
+
+</body>
+
+</html>
