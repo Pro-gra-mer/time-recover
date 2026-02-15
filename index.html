@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Recover — Recupera tu tiempo con IA</title>
+    <title>Time Recover — Recupera tu tiempo. Multiplica tus clientes.</title>
     <meta name="description"
-        content="Sistemas de inteligencia artificial que eliminan las tareas que te roban horas. Auditoría de fricción para CEOs y empresarios.">
+        content="Sistemas de IA que eliminan tu ruido operativo y captan clientes en piloto automático. Auditoría de fricción para CEOs y empresarios.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -25,6 +25,7 @@
             --bg: #F5F0E8;
             --fg: #1A1A1A;
             --accent: #C41E3A;
+            --accent2: #1B6B4A;
             --muted: #8B7355;
             --cream: #FAF7F2;
         }
@@ -61,7 +62,7 @@
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 900;
-            max-width: 700px;
+            max-width: 750px;
             line-height: 1.2;
             margin-bottom: 4rem;
         }
@@ -150,6 +151,18 @@
             }
         }
 
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+
         .animate-scan {
             animation: scan 2s ease-in-out infinite;
         }
@@ -224,7 +237,7 @@
 
         .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 5vw, 5rem);
+            font-size: clamp(2.8rem, 4.5vw, 4.5rem);
             font-weight: 900;
             line-height: 1.05;
             margin-bottom: 2rem;
@@ -235,11 +248,15 @@
             color: var(--accent);
         }
 
+        .hero-title .green {
+            color: var(--accent2);
+        }
+
         .hero-subtitle {
             font-size: 0.9rem;
             line-height: 1.8;
             opacity: 0.6;
-            max-width: 400px;
+            max-width: 420px;
             margin-bottom: 3rem;
         }
 
@@ -279,49 +296,28 @@
             left: 8px;
         }
 
-        /* Clock Visualization */
-        .time-display {
-            position: absolute;
-            font-family: 'Playfair Display', serif;
-            font-size: 20rem;
-            font-weight: 900;
-            opacity: 0.05;
-            color: var(--fg);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .clock-container {
+        /* Dual Metrics Visualization */
+        .dual-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
             position: relative;
-            width: 300px;
-            height: 300px;
+            z-index: 2;
         }
 
-        .clock-ring {
-            position: absolute;
-            inset: 0;
-            border: 2px solid var(--fg);
-            border-radius: 50%;
-            animation: rotate-slow 60s linear infinite;
-        }
-
-        .clock-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .metric-block {
             text-align: center;
+            position: relative;
         }
 
-        .clock-number {
+        .metric-number {
             font-family: 'Playfair Display', serif;
             font-size: 5rem;
             font-weight: 900;
             line-height: 1;
         }
 
-        .clock-label {
+        .metric-label {
             font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 0.3em;
@@ -329,14 +325,24 @@
             opacity: 0.5;
         }
 
-        @keyframes rotate-slow {
-            from {
-                transform: rotate(0deg);
-            }
+        .metric-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--fg);
+            opacity: 0.2;
+            margin: 0 auto;
+        }
 
-            to {
-                transform: rotate(360deg);
-            }
+        .time-display {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 18rem;
+            font-weight: 900;
+            opacity: 0.04;
+            color: var(--fg);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         /* Marquee */
@@ -350,7 +356,7 @@
 
         .marquee-content {
             display: inline-block;
-            animation: marquee 20s linear infinite;
+            animation: marquee 25s linear infinite;
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.3em;
@@ -366,46 +372,73 @@
             }
         }
 
-        /* ===== PROBLEM ===== */
+        /* ===== DUAL PROBLEM ===== */
         .problem-section {
             background: var(--bg);
         }
 
-        .problem-grid {
+        .problem-duality {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr auto 1fr;
             gap: 0;
+            margin-bottom: 4rem;
         }
 
-        .problem-card {
-            padding: 3rem;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            position: relative;
-            transition: background 0.3s;
+        .problem-side {
+            padding: 4rem;
         }
 
-        .problem-card:hover {
-            background: var(--cream);
+        .problem-side-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            font-weight: 700;
         }
 
-        .problem-number {
+        .problem-side-label.time {
+            color: var(--accent);
+        }
+
+        .problem-side-label.leads {
+            color: var(--accent2);
+        }
+
+        .problem-divider {
+            width: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-item {
+            margin-bottom: 2.5rem;
+        }
+
+        .problem-item h4 {
             font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            font-weight: 900;
-            opacity: 0.1;
-            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
         }
 
-        .problem-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .problem-card p {
+        .problem-item p {
             font-size: 0.8rem;
             line-height: 1.8;
             opacity: 0.6;
+        }
+
+        .problem-connector {
+            background: var(--fg);
+            color: var(--bg);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        .problem-connector p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
         }
 
         /* ===== SOLUTION ===== */
@@ -416,7 +449,34 @@
         .solution-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8rem;
+            gap: 6rem;
+        }
+
+        .solution-col-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .solution-col-label.time {
+            color: var(--accent);
+        }
+
+        .solution-col-label.leads {
+            color: var(--accent2);
+        }
+
+        .solution-col-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.3;
         }
 
         .solution-list {
@@ -452,28 +512,33 @@
             opacity: 0.6;
         }
 
-        .quote-box {
+        /* ===== CONVERGENCE QUOTE ===== */
+        .convergence {
             background: var(--fg);
             color: var(--bg);
-            padding: 4rem;
-            position: sticky;
-            top: 8rem;
-            align-self: start;
+            padding: 6rem 4rem;
+            text-align: center;
         }
 
-        .quote-mark {
+        .convergence-quote {
             font-family: 'Playfair Display', serif;
-            font-size: 6rem;
-            line-height: 0.5;
-            opacity: 0.2;
-            margin-bottom: 2rem;
+            font-size: clamp(1.8rem, 3.5vw, 3rem);
+            font-weight: 900;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.3;
         }
 
-        .quote-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            line-height: 1.5;
-            font-weight: 700;
+        .convergence-quote em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .convergence-sub {
+            font-size: 0.8rem;
+            opacity: 0.4;
+            margin-top: 2rem;
+            letter-spacing: 0.1em;
         }
 
         /* ===== PROCESS ===== */
@@ -519,6 +584,32 @@
             opacity: 0.6;
         }
 
+        .process-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 0.3rem 0.6rem;
+            border: 1px solid;
+            opacity: 0.7;
+        }
+
+        .tag.time {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tag.leads {
+            border-color: var(--accent2);
+            color: var(--accent2);
+        }
+
         /* ===== USE CASES ===== */
         .cases-section {
             background: var(--cream);
@@ -548,9 +639,16 @@
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.25em;
-            color: var(--accent);
             margin-bottom: 1.5rem;
             font-weight: 700;
+        }
+
+        .case-category.time {
+            color: var(--accent);
+        }
+
+        .case-category.leads {
+            color: var(--accent2);
         }
 
         .case-metric {
@@ -570,7 +668,7 @@
         }
 
         .case-description {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.7;
             opacity: 0.7;
         }
@@ -622,11 +720,35 @@
         }
 
         .price-note {
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto 4rem;
             font-size: 0.9rem;
             line-height: 1.8;
             opacity: 0.6;
+        }
+
+        .price-includes {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .price-item {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.4;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .price-item::before {
+            content: '✓';
+            color: var(--accent);
+            opacity: 1;
         }
 
         /* ===== CONTACT ===== */
@@ -787,17 +909,18 @@
                 padding: 6rem 2rem;
             }
 
-            .problem-grid {
+            .problem-duality {
                 grid-template-columns: 1fr;
+            }
+
+            .problem-divider {
+                width: 100%;
+                height: 1px;
             }
 
             .solution-content {
                 grid-template-columns: 1fr;
                 gap: 4rem;
-            }
-
-            .quote-box {
-                position: static;
             }
 
             .process-timeline {
@@ -860,33 +983,38 @@
         <a href="#contacto" class="nav-link">Solicitar Auditoría →</a>
     </nav>
 
+    <!-- ============================================ -->
     <!-- HERO -->
+    <!-- ============================================ -->
     <section class="hero">
         <div class="hero-left">
             <div class="eyebrow">Solo 2 proyectos/mes</div>
             <h1 class="hero-title">
-                Tu tiempo<br>
-                tiene <em>precio</em>.<br>
-                Recupéralo.
+                Recupera tu<br>
+                <em>tiempo</em>.<br>
+                Multiplica tus<br>
+                <span class="green">clientes</span>.
             </h1>
             <p class="hero-subtitle">
-                No necesitas más personal. Necesitas sistemas de IA que ejecuten el ruido mientras tú diriges.
+                Sistemas de IA que eliminan tu ruido operativo y captan leads cualificados mientras duermes. Tú diriges,
+                la máquina ejecuta.
             </p>
             <a href="#contacto" class="cta-brutal">
-                Recuperar mis horas
+                Quiero mi auditoría
                 <span>→</span>
             </a>
         </div>
         <div class="hero-right">
             <span class="time-display">∞</span>
-            <div class="clock-container">
-                <div class="clock-ring"></div>
-                <div class="clock-ring" style="inset: 20px; animation-duration: 45s; animation-direction: reverse;">
+            <div class="dual-metrics">
+                <div class="metric-block">
+                    <div class="metric-number" id="hours-saved">30</div>
+                    <div class="metric-label">horas/semana recuperadas</div>
                 </div>
-                <div class="clock-ring" style="inset: 40px; animation-duration: 30s;"></div>
-                <div class="clock-center">
-                    <div class="clock-number" id="hours-saved">30</div>
-                    <div class="clock-label">horas/semana recuperadas</div>
+                <div class="metric-divider"></div>
+                <div class="metric-block">
+                    <div class="metric-number" id="leads-generated">150</div>
+                    <div class="metric-label">leads cualificados/mes</div>
                 </div>
             </div>
         </div>
@@ -895,98 +1023,185 @@
     <!-- MARQUEE -->
     <div class="marquee-container">
         <div class="marquee-content">
-            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★
-            AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ INTEGRACIÓN SILENCIOSA &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA
-            RECUPERADAS &nbsp;&nbsp;&nbsp; ★ SOLO 2 PROYECTOS/MES &nbsp;&nbsp;&nbsp;
-            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★
-            AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ INTEGRACIÓN SILENCIOSA &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA
-            RECUPERADAS &nbsp;&nbsp;&nbsp; ★ SOLO 2 PROYECTOS/MES &nbsp;&nbsp;&nbsp;
+            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ CAPTACIÓN DE LEADS 24/7 &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA
+            PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★ AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ PIPELINE EN PILOTO AUTOMÁTICO
+            &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA RECUPERADAS &nbsp;&nbsp;&nbsp;
+            ★ AUTOMATIZACIÓN INTELIGENTE &nbsp;&nbsp;&nbsp; ★ CAPTACIÓN DE LEADS 24/7 &nbsp;&nbsp;&nbsp; ★ AGENTES DE IA
+            PERSONALIZADOS &nbsp;&nbsp;&nbsp; ★ AUDITORÍA DE FRICCIÓN &nbsp;&nbsp;&nbsp; ★ PIPELINE EN PILOTO AUTOMÁTICO
+            &nbsp;&nbsp;&nbsp; ★ +30H/SEMANA RECUPERADAS &nbsp;&nbsp;&nbsp;
         </div>
     </div>
 
-    <!-- PROBLEM -->
+    <!-- ============================================ -->
+    <!-- DUAL PROBLEM -->
+    <!-- ============================================ -->
     <section class="problem-section" id="problema">
-        <div class="section-label">El Problema</div>
+        <div class="section-label">El Doble Problema</div>
         <h2 class="section-title">
-            Tu negocio crece. Tu calendario no.
+            Pierdes tiempo en lo que no importa. Y no llegas a quien sí importa.
         </h2>
-        <div class="problem-grid">
-            <div class="problem-card">
-                <div class="problem-number">01</div>
-                <h3>El ruido operativo</h3>
-                <p>Emails, reportes, follow-ups, coordinación. Tareas que no generan valor pero devoran tu agenda.</p>
+        <div class="problem-duality">
+            <div class="problem-side">
+                <div class="problem-side-label time">⏱ Tiempo perdido</div>
+                <div class="problem-item">
+                    <h4>El ruido operativo</h4>
+                    <p>Emails, reportes, follow-ups, coordinación. Tareas que no generan valor pero devoran tu agenda.
+                    </p>
+                </div>
+                <div class="problem-item">
+                    <h4>La ilusión del control</h4>
+                    <p>Revisas todo porque "nadie lo hace como tú". Ese control te cuesta 30+ horas semanales.</p>
+                </div>
+                <div class="problem-item">
+                    <h4>El coste invisible</h4>
+                    <p>Cada hora en tareas operativas es una hora menos en estrategia, clientes clave o tu vida.</p>
+                </div>
             </div>
-            <div class="problem-card">
-                <div class="problem-number">02</div>
-                <h3>La ilusión del control</h3>
-                <p>Revisas todo porque "nadie lo hace como tú". Pero ese control te cuesta 30+ horas semanales.</p>
+            <div class="problem-divider"></div>
+            <div class="problem-side">
+                <div class="problem-side-label leads">◎ Clientes que no llegan</div>
+                <div class="problem-item">
+                    <h4>Pipeline vacío o manual</h4>
+                    <p>Tu estrategia de captación depende de ti, de tu tiempo, de tu energía. Si paras, el pipeline se
+                        seca.</p>
+                </div>
+                <div class="problem-item">
+                    <h4>Leads fríos, sin contexto</h4>
+                    <p>Recibes contactos genéricos que requieren horas de cualificación antes de saber si valen la pena.
+                    </p>
+                </div>
+                <div class="problem-item">
+                    <h4>El seguimiento que no existe</h4>
+                    <p>El 80% de las ventas necesitan 5+ interacciones. Tú abandonas en la segunda por falta de tiempo.
+                    </p>
+                </div>
             </div>
-            <div class="problem-card">
-                <div class="problem-number">03</div>
-                <h3>El coste invisible</h3>
-                <p>Cada hora en tareas operativas es una hora menos en estrategia, clientes clave o tu propia vida.</p>
-            </div>
+        </div>
+        <div class="problem-connector">
+            <p>El mismo problema con dos caras: <em style="color: var(--accent);">no tienes tiempo</em> para captar, y
+                <em style="color: var(--accent);">no captas</em> porque no tienes tiempo.</p>
         </div>
     </section>
 
-    <!-- SOLUTION -->
+    <!-- ============================================ -->
+    <!-- SOLUTION: TWO PILLARS -->
+    <!-- ============================================ -->
     <section class="solution-section" id="solucion">
-        <div class="section-label">La Arquitectura</div>
+        <div class="section-label">La Arquitectura Dual</div>
         <h2 class="section-title">
-            Agentes invisibles que ejecutan mientras tú decides.
+            Un sistema. Dos resultados. Tiempo libre y pipeline lleno.
         </h2>
         <div class="solution-content">
-            <ul class="solution-list">
-                <li class="solution-item">
-                    <div class="solution-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 4H21V6L14 13V21H10V13L3 6V4Z" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="square" />
-                            <path class="animate-scan" d="M8 8H16" stroke="currentColor" stroke-width="1.5" />
-                        </svg>
-                    </div>
-                    <div class="solution-text">
-                        <h4>Filtrado inteligente</h4>
-                        <p>Solo lo que requiere tu atención llega a ti. El resto se procesa, archiva o responde
-                            automáticamente.</p>
-                    </div>
-                </li>
-                <li class="solution-item">
-                    <div class="solution-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="4" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
-                            <rect x="14" y="14" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
-                            <path class="animate-flow" d="M10 7H17V14" stroke="currentColor" stroke-width="1.5" />
-                            <path class="animate-flow" d="M14 17H7V10" stroke="currentColor" stroke-width="1.5" />
-                        </svg>
-                    </div>
-                    <div class="solution-text">
-                        <h4>Integración silenciosa</h4>
-                        <p>Slack, Email, WhatsApp, CRMs. Tus agentes viven donde ya trabajas, sin interferir.</p>
-                    </div>
-                </li>
-                <li class="solution-item">
-                    <div class="solution-icon">
-                        <svg class="animate-rise" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" />
-                            <path d="M17 17V7H7" stroke="currentColor" stroke-width="2" />
-                        </svg>
-                    </div>
-                    <div class="solution-text">
-                        <h4>Evolución continua</h4>
-                        <p>Cada semana más precisos, más rápidos, más alineados con tu forma de pensar.</p>
-                    </div>
-                </li>
-            </ul>
-            <div class="quote-box">
-                <div class="quote-mark">"</div>
-                <p class="quote-text">Tú no aprendes IA. La IA trabaja para ti.</p>
+            <!-- Pilar 1: Tiempo -->
+            <div>
+                <div class="solution-col-label time">Pilar 1 — Recuperación de Tiempo</div>
+                <ul class="solution-list">
+                    <li class="solution-item">
+                        <div class="solution-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 4H21V6L14 13V21H10V13L3 6V4Z" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="square" />
+                                <path class="animate-scan" d="M8 8H16" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="solution-text">
+                            <h4>Filtrado inteligente</h4>
+                            <p>Solo lo que requiere tu atención llega a ti. El resto se procesa, archiva o responde
+                                automáticamente.</p>
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="4" y="4" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
+                                <rect x="14" y="14" width="6" height="6" stroke="currentColor" stroke-width="1.5" />
+                                <path class="animate-flow" d="M10 7H17V14" stroke="currentColor" stroke-width="1.5" />
+                                <path class="animate-flow" d="M14 17H7V10" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="solution-text">
+                            <h4>Integración silenciosa</h4>
+                            <p>Slack, Email, WhatsApp, CRMs. Tus agentes viven donde ya trabajas, sin interferir.</p>
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-icon">
+                            <svg class="animate-rise" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 17L17 7" stroke="currentColor" stroke-width="2" />
+                                <path d="M17 17V7H7" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="solution-text">
+                            <h4>Evolución continua</h4>
+                            <p>Cada semana más precisos, más rápidos, más alineados con tu forma de pensar.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- Pilar 2: Leads -->
+            <div>
+                <div class="solution-col-label leads">Pilar 2 — Captación Automática</div>
+                <ul class="solution-list">
+                    <li class="solution-item">
+                        <div class="solution-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" />
+                                <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1"
+                                    stroke-dasharray="3 3" />
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="0.5" opacity="0.4" />
+                            </svg>
+                        </div>
+                        <div class="solution-text">
+                            <h4>Prospección inteligente</h4>
+                            <p>Agentes que identifican tu cliente ideal en LinkedIn, directorios y bases de datos. Sin
+                                esfuerzo manual.</p>
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 4h16v12H5.17L4 17.17V4z" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="1.2" opacity="0.6" />
+                            </svg>
+                        </div>
+                        <div class="solution-text">
+                            <h4>Mensajes hiperpersonalizados</h4>
+                            <p>IA que investiga cada prospecto y escribe mensajes con contexto real. No spam:
+                                conversaciones que abren puertas.</p>
+                        </div>
+                    </li>
+                    <li class="solution-item">
+                        <div class="solution-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 12L9 18L21 6" stroke="currentColor" stroke-width="2" />
+                                <path d="M3 6L9 12" stroke="currentColor" stroke-width="1" opacity="0.3" />
+                            </svg>
+                        </div>
+                        <div class="solution-text">
+                            <h4>Follow-up automático</h4>
+                            <p>Secuencias de seguimiento que nunca olvidan, nunca presionan y convierten el interés
+                                tibio en reuniones cerradas.</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
+    <!-- CONVERGENCE -->
+    <!-- ============================================ -->
+    <div class="convergence">
+        <p class="convergence-quote">
+            Menos ruido, más <em>pipeline</em>.<br>
+            Menos horas, más <em>ingresos</em>.
+        </p>
+        <p class="convergence-sub">— El resultado de automatizar lo correcto.</p>
+    </div>
+
+    <!-- ============================================ -->
     <!-- PROCESS -->
+    <!-- ============================================ -->
     <section class="process-section" id="proceso">
         <div class="section-label">El Proceso</div>
         <h2 class="section-title">
@@ -994,21 +1209,45 @@
         </h2>
         <div class="process-timeline">
             <div class="process-step" data-step="01">
-                <h4>Auditoría de fricción</h4>
-                <p>Identificamos cada tarea que te roba foco. Mapeamos tu flujo de trabajo real.</p>
+                <h4>Auditoría dual</h4>
+                <p>Mapeamos tu flujo operativo Y tu proceso de captación. Identificamos cada punto de fricción y cada
+                    oportunidad perdida.</p>
+                <div class="process-tags">
+                    <span class="tag time">Tiempo</span>
+                    <span class="tag leads">Leads</span>
+                </div>
             </div>
             <div class="process-step" data-step="02">
                 <h4>Arquitectura de agentes</h4>
-                <p>Diseñamos el ecosistema de IA específico para tu operativa.</p>
+                <p>Diseñamos tu ecosistema de IA: agentes operativos que te liberan horas y agentes comerciales que
+                    llenan tu pipeline.</p>
+                <div class="process-tags">
+                    <span class="tag time">Tiempo</span>
+                    <span class="tag leads">Leads</span>
+                </div>
             </div>
             <div class="process-step" data-step="03">
                 <h4>Despliegue y calibración</h4>
-                <p>Implementamos, entrenamos con tu tono y ajustamos hasta la perfección.</p>
+                <p>Implementamos, entrenamos con tu tono y tu propuesta de valor, y ajustamos hasta la perfección.</p>
+                <div class="process-tags">
+                    <span class="tag time">Tiempo</span>
+                    <span class="tag leads">Leads</span>
+                </div>
+            </div>
+            <div class="process-step" data-step="04">
+                <h4>Optimización continua</h4>
+                <p>Cada semana analizamos resultados, refinamos mensajes y escalamos los canales que mejor convierten.
+                </p>
+                <div class="process-tags">
+                    <span class="tag leads">Leads</span>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- USE CASES -->
+    <!-- ============================================ -->
     <section class="cases-section" id="casos">
         <div class="section-label">Casos de Uso Quirúrgicos</div>
         <h2 class="section-title">
@@ -1016,7 +1255,7 @@
         </h2>
         <div class="cases-grid">
             <div class="case-card">
-                <div class="case-category">Gestión de Email</div>
+                <div class="case-category time">Tiempo recuperado</div>
                 <div class="case-metric">0</div>
                 <div class="case-metric-label">Intervención humana</div>
                 <p class="case-description">
@@ -1026,60 +1265,100 @@
                 <span class="case-arrow">→</span>
             </div>
             <div class="case-card">
-                <div class="case-category">Agenda Ejecutiva</div>
-                <div class="case-metric">32h</div>
-                <div class="case-metric-label">Recuperadas / Semana</div>
+                <div class="case-category leads">Captación automática</div>
+                <div class="case-metric">47</div>
+                <div class="case-metric-label">Reuniones / Mes</div>
                 <p class="case-description">
-                    Coordinación automática de reuniones, recordatorios inteligentes y filtrado de solicitudes
-                    irrelevantes. Cero conflictos de agenda.
+                    Sistema de prospección en LinkedIn + email que genera 47 reuniones cualificadas al mes. Sin
+                    contratar comerciales, sin cold calling.
                 </p>
                 <span class="case-arrow">→</span>
             </div>
             <div class="case-card">
-                <div class="case-category">Operaciones</div>
+                <div class="case-category time">Tiempo recuperado</div>
+                <div class="case-metric">32h</div>
+                <div class="case-metric-label">Liberadas / Semana</div>
+                <p class="case-description">
+                    Coordinación automática de reuniones, informes financieros y gestión documental. El equipo se enfoca
+                    en lo estratégico.
+                </p>
+                <span class="case-arrow">→</span>
+            </div>
+            <div class="case-card">
+                <div class="case-category leads">Captación automática</div>
+                <div class="case-metric">340%</div>
+                <div class="case-metric-label">ROI en 90 días</div>
+                <p class="case-description">
+                    Consultora B2B que pasó de depender de referidos a tener un flujo predecible de clientes nuevos cada
+                    mes. Pipeline siempre lleno.
+                </p>
+                <span class="case-arrow">→</span>
+            </div>
+            <div class="case-card">
+                <div class="case-category time">Operaciones</div>
                 <div class="case-metric">85%</div>
                 <div class="case-metric-label">Tareas Automatizadas</div>
                 <p class="case-description">
-                    Informes financieros, seguimiento de proveedores y gestión documental ejecutados sin supervisión. El
-                    equipo se enfoca en lo estratégico.
+                    Seguimiento de proveedores, facturación y reporting ejecutados sin supervisión. El fundador recuperó
+                    sus tardes.
+                </p>
+                <span class="case-arrow">→</span>
+            </div>
+            <div class="case-card">
+                <div class="case-category leads">Captación automática</div>
+                <div class="case-metric">6x</div>
+                <div class="case-metric-label">Más leads cualificados</div>
+                <p class="case-description">
+                    De 8 leads/mes manuales a 50+ leads cualificados con follow-up automático multicanal. Sin aumentar
+                    presupuesto publicitario.
                 </p>
                 <span class="case-arrow">→</span>
             </div>
         </div>
     </section>
 
+    <!-- ============================================ -->
     <!-- PRICING -->
+    <!-- ============================================ -->
     <section class="pricing-section">
         <div class="section-label" style="color: rgba(255,255,255,0.3);">La Inversión</div>
         <h2 class="section-title" style="color: var(--bg); margin: 0 auto;">
-            No es un coste. Es comprar libertad.
+            No es un coste. Es comprar tiempo y clientes.
         </h2>
         <div class="price-display">
             <p class="price-from">Sistemas desde</p>
             <p class="price-amount">2.000€</p>
             <p class="price-period">al mes, todo incluido</p>
         </div>
+        <div class="price-includes">
+            <span class="price-item">Automatización operativa</span>
+            <span class="price-item">Captación de leads</span>
+            <span class="price-item">Follow-up automático</span>
+            <span class="price-item">Optimización semanal</span>
+        </div>
         <p class="price-note">
-            Para empresarios cuya hora vale más de 200€. Si no recuperamos al menos 10x tu inversión en tiempo, no tiene
-            sentido trabajar juntos.
+            Para empresarios cuya hora vale más de 200€ y cuyo pipeline no puede depender de la suerte. Si no
+            recuperamos al menos 10x tu inversión, no tiene sentido trabajar juntos.
         </p>
         <a href="#contacto" class="cta-brutal" style="margin: 0 auto;">
-            Solicitar auditoría
+            Solicitar auditoría dual
             <span>→</span>
         </a>
     </section>
 
+    <!-- ============================================ -->
     <!-- CONTACT -->
+    <!-- ============================================ -->
     <section class="contact-section" id="contacto">
         <div class="section-label">Contacto</div>
         <h2 class="section-title">
-            ¿Listo para recuperar tu tiempo?
+            ¿Listo para recuperar horas y llenar tu pipeline?
         </h2>
         <div class="contact-grid">
             <div class="contact-intro">
-                <h3>Cuéntanos qué te roba horas y diseñamos tu sistema.</h3>
-                <p>Esto no es una demo ni una consultoría gratuita. Es una conversación para evaluar si tiene sentido
-                    trabajar juntos.</p>
+                <h3>Cuéntanos qué te roba horas y cómo captas clientes hoy.</h3>
+                <p>Esto no es una demo. Es una conversación para evaluar si nuestros sistemas pueden darte resultados
+                    reales en tu caso específico.</p>
             </div>
             <form class="contact-form" action="contacto.php" method="POST">
                 <div id="status-message"
@@ -1094,11 +1373,12 @@
                     <input type="email" name="email" required placeholder="tu@empresa.com">
                 </div>
                 <div class="form-group">
-                    <label>¿Qué te roba más tiempo hoy?</label>
-                    <textarea name="tareas" required placeholder="Email, gestión de equipo, facturación..."></textarea>
+                    <label>¿Qué te roba más tiempo y cómo captas clientes hoy?</label>
+                    <textarea name="tareas" required
+                        placeholder="Email, gestión de equipo, captación manual, dependo de referidos..."></textarea>
                 </div>
                 <button type="submit" class="submit-btn">
-                    Enviar solicitud →
+                    Solicitar auditoría dual →
                 </button>
             </form>
         </div>
@@ -1143,33 +1423,37 @@
         }
         animateCursor();
 
-        // Animate hours counter on scroll
-        const hoursEl = document.getElementById('hours-saved');
-        let hasAnimated = false;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasAnimated) {
-                    hasAnimated = true;
-                    animateNumber(hoursEl, 0, 30, 2000);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(hoursEl);
-
-        function animateNumber(el, start, end, duration) {
+        // Animate counters on scroll
+        function animateNumber(el, start, end, duration, suffix = '') {
             let startTime = null;
             function update(currentTime) {
                 if (!startTime) startTime = currentTime;
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 4);
-                el.textContent = Math.floor(start + (end - start) * eased);
+                el.textContent = Math.floor(start + (end - start) * eased) + suffix;
                 if (progress < 1) requestAnimationFrame(update);
             }
             requestAnimationFrame(update);
         }
+
+        const hoursEl = document.getElementById('hours-saved');
+        const leadsEl = document.getElementById('leads-generated');
+        let hasAnimatedHero = false;
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimatedHero) {
+                    hasAnimatedHero = true;
+                    animateNumber(hoursEl, 0, 30, 2000);
+                    setTimeout(() => {
+                        animateNumber(leadsEl, 0, 150, 2500, '+');
+                    }, 400);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        heroObserver.observe(hoursEl);
 
         // Handle Form Status Notifications
         const urlParams = new URLSearchParams(window.location.search);
